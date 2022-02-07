@@ -1,0 +1,69 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ENCRYPT</title>
+    <meta name="description" content="Invitation">
+    <meta name="author" content="KenCam">
+
+    <style>
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        textarea {
+            width: 100%;
+            height: 50vh;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+        integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+
+    <!-- <img id="enc_img"> -->
+
+    <input id="inp" type='file'>
+    <p id="b64"></p>
+    <textarea id="enc"></textarea>
+    <img id="img" height="150">
+
+    <script>
+        function readFile() {
+
+            if (this.files && this.files[0]) {
+                var password = window.prompt("Enter password: ");
+
+                var FR = new FileReader();
+
+                FR.addEventListener("load", function (e) {
+                    document.getElementById("img").src = e.target.result;
+                    document.getElementById("b64").innerHTML = e.target.result;
+
+                    var encrypted = CryptoJS.Rabbit.encrypt(e.target.result, password).toString();
+                    document.getElementById("enc").value = encrypted;
+                });
+
+                FR.readAsDataURL(this.files[0]);
+            }
+
+        }
+
+        document.getElementById("inp").addEventListener("change", readFile);
+
+    </script>
+
+</body>
+
+</html>
