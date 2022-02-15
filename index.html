@@ -44,7 +44,7 @@
         }
 
         var password = window.prompt("Enter password: ");
-        fetch("http://127.0.0.1:8887/test_encrypted")
+        fetch("https://raw.githubusercontent.com/kencamdk/test/gh-pages/test_encrypted")
             .then(d => d.text())
             .then(data => decryptAndShowImage(data, password));
 
